@@ -11,7 +11,7 @@ namespace BotProject
             string message = update.Message.Text;
             if(message == "/start")
             {
-                //hhdvkvdgc
+                //hhdvkvdgcl,l,
                 await OnSendStartMessageAsync(botClient, update, cancellationToken);
             }
         }
