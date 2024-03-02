@@ -48,7 +48,7 @@ namespace BotProject
             }
             else
             {
-                await botManager.SendUpdateAsync(client, update, token);
+                await botManager.MessageTextAsync(client, update, token);
             }
         }
     }

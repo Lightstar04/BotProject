@@ -9,10 +9,7 @@ namespace BotProject
     {
         public async Task SendUpdateAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
         {
-            if(update.Message.Type == MessageType.Text)
-            {
-                await MessageTextAsync(botClient, update, cancellationToken);
-            }
+            await MessageTextAsync(botClient, update, cancellationToken);
         }
     }
 }
