@@ -1,22 +1,26 @@
 ﻿using Telegram.Bot;
 using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
 
 namespace BotProject
 {
     internal partial class BotManager
     {
-        async Task MessageTextAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
+        public async Task MessageTextAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
         {
             string message = update.Message.Text;
             if(message == "/start")
             {
-                //hhdvkvdgcl,l,
                 await OnSendStartMessageAsync(botClient, update, cancellationToken);
+            }
+            else if(update.Message.Type is MessageType.Text)
+            {
+                await RegisterUserAsync(botClient, update, cancellationToken);
             }
         }
 
-        private async Task OnSendStartMessageAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
+        public async Task OnSendStartMessageAsync(ITelegramBotClient botClient, Update update, CancellationToken cancellationToken)
         {
             if(WorkingWithFile.ReadFromFile().Result.Find(user => user.Id == update.Message.MessageId) is null)
             {
