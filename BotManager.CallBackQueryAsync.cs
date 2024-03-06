@@ -1,4 +1,6 @@
-﻿using Telegram.Bot;
+﻿using Newtonsoft.Json.Linq;
+using System.Threading;
+using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 using Telegram.Bot.Types.ReplyMarkups;
@@ -29,6 +31,7 @@ namespace BotProject
             else if(update.CallbackQuery.Data is "task")
             {
                 await CommonButtonsAsync(client, update.CallbackQuery.Message, cancellationToken);
+                await CommonAsync(client, update, cancellationToken);
             }
             else if(update.CallbackQuery.Data is "update")
             {
@@ -58,9 +61,6 @@ namespace BotProject
                             InlineKeyboardButton.WithCallbackData("⬅️ Ortga", "back")
                         }
                     }));
-
-            delegateForBack = null;
-            delegateForBack = Menu;
         }
 
         async Task UpdateInfoAsync(ITelegramBotClient client, Message message, CancellationToken token)
@@ -74,6 +74,55 @@ namespace BotProject
                         new KeyboardButton("⬅️ Ortga")
                     })
                 { OneTimeKeyboard = true, ResizeKeyboard = true});
+            delegateForBack = null;
+            delegateForBack = Menu;
+        }
+
+        async Task CommonAsync(ITelegramBotClient client, Update update, CancellationToken token)
+        {
+            if(update.CallbackQuery.Data is "easy")
+            {
+                Message mess = await client.SendTextMessageAsync(
+                    chatId: update.CallbackQuery.Message.Chat.Id,
+                    text: "2",
+                    replyMarkup: new ReplyKeyboardMarkup(
+                        new KeyboardButton[]
+                        {
+                            new KeyboardButton("⬅️ Ortga")
+                        }));
+                messageID = mess.MessageId;
+            }
+            else if(update.CallbackQuery.Data is "medium")
+            {
+                Message mess1 = await client.SendTextMessageAsync(
+                    chatId: update.CallbackQuery.Message.Chat.Id,
+                    text: "3",
+                    replyMarkup: new ReplyKeyboardMarkup(
+                        new KeyboardButton[][]
+                        {
+                            new KeyboardButton[]
+                            {
+                                new KeyboardButton("⬅️ Ortga")
+                            }
+                        }));
+                messageID = mess1.MessageId;
+            }
+            else if (update.CallbackQuery.Data is "hard")
+            {
+                Message mess3 = await client.SendTextMessageAsync(
+                    chatId: update.CallbackQuery.Message.Chat.Id,
+                    text: "4",
+                    replyMarkup: new ReplyKeyboardMarkup(
+                        new KeyboardButton[][]
+                        {
+                            new KeyboardButton[]
+                            {
+                                new KeyboardButton("⬅️ Ortga")
+                            }
+                        }));
+                messageID = mess3.MessageId;
+            }
+
             delegateForBack = null;
             delegateForBack = Menu;
         }
