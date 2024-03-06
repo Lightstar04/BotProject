@@ -8,7 +8,7 @@ namespace BotProject
     internal class Program
     {
         static BotManager botManager = new BotManager();
-        const string token = "6994270115:AAEJmuUiC5Mj4OkcVnfLHO5td-FrHX5QZ-c";
+        const string token = "6899842772:AAH4cdFppexrcB8eKvBYPfvA159gizrtYd0";
         static void Main(string[] args)
         {
             TelegramBotClient botClient = new TelegramBotClient(token);

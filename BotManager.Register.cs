@@ -11,7 +11,7 @@ namespace BotProject
             List<TelegramUser> users = await WorkingWithFile.ReadFromFile();
             TelegramUser user = new TelegramUser()
             {
-                Id = update.Message.Contact.UserId,
+                Id = update.Message.Chat.Id,
                 UserName = update.Message.From.Username
             };
             users.Add(user);
